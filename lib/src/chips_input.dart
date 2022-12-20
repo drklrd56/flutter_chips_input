@@ -11,6 +11,7 @@ import 'text_cursor.dart';
 
 //This will override the default behaviour of box position and forces to use the provided
 enum SuggestionBoxPosition { top, bottom }
+
 typedef ChipsInputSuggestions<T> = FutureOr<List<T>> Function(String query);
 typedef ChipSelected<T> = void Function(T data, bool selected);
 typedef ChipsBuilder<T> = Widget Function(
@@ -146,7 +147,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
     _focusNode.addListener(_handleFocusChanged);
     _nodeAttachment = _focusNode.attach(context);
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       _initOverlayEntry();
       if (mounted && widget.autofocus) {
         FocusScope.of(context).autofocus(_focusNode);
@@ -329,7 +330,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
 
   void _scrollToVisible() {
     Future.delayed(const Duration(milliseconds: 300), () {
-      WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         final renderBox = context.findRenderObject() as RenderBox;
         await Scrollable.of(context)?.position.ensureVisible(renderBox);
       });
@@ -486,7 +487,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
 
     return NotificationListener<SizeChangedLayoutNotification>(
       onNotification: (SizeChangedLayoutNotification val) {
-        WidgetsBinding.instance?.addPostFrameCallback((_) async {
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
           _suggestionsBoxController.overlayEntry?.markNeedsBuild();
         });
         return true;
@@ -519,5 +520,20 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
         ),
       ),
     );
+  }
+
+  @override
+  void insertTextPlaceholder(Size size) {
+    throw UnimplementedError('insertTextPlaceholder');
+  }
+
+  @override
+  void removeTextPlaceholder() {
+    throw UnimplementedError('removeTextPlaceholder');
+  }
+
+  @override
+  void showToolbar() {
+    throw UnimplementedError('showToolbar');
   }
 }

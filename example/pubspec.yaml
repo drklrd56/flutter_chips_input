@@ -2,8 +2,8 @@ name: example
 description: Example Project for flutter_chips_input
 
 environment:
-  sdk: ">=2.10.0 <3.0.0"
-  flutter: ">=1.22.0"
+  sdk: ">=2.18.5 <3.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
