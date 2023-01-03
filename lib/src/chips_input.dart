@@ -497,9 +497,11 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
           children: <Widget>[
             GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: () {
-                requestKeyboard();
-              },
+              onTap: widget.enabled
+                  ? () {
+                      requestKeyboard();
+                    }
+                  : null,
               child: InputDecorator(
                 decoration: widget.decoration,
                 isFocused: _focusNode.hasFocus,
